@@ -38,8 +38,7 @@ public class ProjectDataController {
     @Autowired
     private ProjectDataRepo projDataRepo;
     
-	@Autowired
-	private ProjectDataService projectService;
+	
 	
 	@GetMapping
 	public ResponseEntity<?> findAll() {

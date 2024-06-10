@@ -14,42 +14,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.ltimindtree.poc.entity.ProjectData;
 import com.ltimindtree.poc.entity.ProjectParameter;
+import com.ltimindtree.poc.repository.ProjectParameterRepo;
 import com.ltimindtree.poc.service.ParameterService;
 import com.ltimindtree.poc.service.ProjectDataService;
 
 	@RestController
 	@RequestMapping("/api/parameter")
 	public class ParameterController {
-		/*
+		
 		@Autowired
-		private ParameterService parameterService;
+		private ProjectParameterRepo parameterRepo;
 		
 		@GetMapping
 		public ResponseEntity<?> findAll() {
 			
-			List<ProjectParameter> prods = parameterService.findAll();
 
 			
-			return ResponseEntity.ok().body(prods);
+			 Iterable<ProjectParameter> pdreturn = parameterRepo.findAll();
+			 for (ProjectParameter pd : pdreturn) {
+		            System.out.println("List object: " + new Gson().toJson(pd));
+		        }
+			//List<ProjectData> prods = projectService.findAll();
+
+			
+			return ResponseEntity.ok().body(pdreturn);
 		}
 
 		@PostMapping()
-		public ResponseEntity<ProjectParameter> createProduct(@RequestBody ProjectParameter projects) {
-			return ResponseEntity.ok().body(parameterService.createProduct(projects));
+		public ResponseEntity<Iterable<ProjectParameter>> createProduct(@RequestBody ProjectParameter projects) {
+			parameterRepo.save(projects);
+			return ResponseEntity.ok().body(parameterRepo.findAll());
 		}
 		
 		@PutMapping()
-		public ResponseEntity<List<ProjectParameter>> updateProduct(@RequestBody List<ProjectParameter> projectlist) {
-			return ResponseEntity.ok().body(parameterService.updateBulkProduct(projectlist));
+		public ResponseEntity<Iterable<ProjectParameter>> updateProduct(@RequestBody List<ProjectParameter> projectlist) {
+			parameterRepo.saveAll(projectlist);
+			return ResponseEntity.ok().body(parameterRepo.findAll());
 		}
 		
 		@DeleteMapping()
-		public HttpStatus deleteProduct(@PathVariable long id) {
-			parameterService.deleteById(id);
+		public HttpStatus deleteProduct(@PathVariable String projectId) {
+			parameterRepo.deleteById(projectId);
 			
 			return HttpStatus.OK;
 		}
-*/
 	}

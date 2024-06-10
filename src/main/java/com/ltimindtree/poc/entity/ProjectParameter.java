@@ -4,35 +4,45 @@ import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-@DynamoDBTable(tableName = "wsr_g_sample")
+@DynamoDBTable(tableName = "projectParameter")
 public class ProjectParameter {
+	
+	private static final long serialVersionUID = 1L;
 
 	@DynamoDBHashKey()
-	private long id;
+	private String projectId;
 	
+	@DynamoDBAttribute
 	private String paramName;
 	
-	private long maxRange;
+	@DynamoDBAttribute
+	private String maxRange;
 	
+	@DynamoDBAttribute
 	private Map<String,String> rangetext;
 	
-	private long weightage;
+	@DynamoDBAttribute
+	private String weightage;
 	
+	@DynamoDBAttribute
 	private String updatedAt;
 	
+	@DynamoDBAttribute
 	private String createdAt;
 	
-	private String isDeleted;
+	@DynamoDBAttribute
+	private boolean isDeleted;
 
-	public long getId() {
-		return id;
+	public String getProjectId() {
+		return projectId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getParamName() {
@@ -43,11 +53,11 @@ public class ProjectParameter {
 		this.paramName = paramName;
 	}
 
-	public long getMaxRange() {
+	public String getMaxRange() {
 		return maxRange;
 	}
 
-	public void setMaxRange(long maxRange) {
+	public void setMaxRange(String maxRange) {
 		this.maxRange = maxRange;
 	}
 
@@ -59,11 +69,11 @@ public class ProjectParameter {
 		this.rangetext = rangetext;
 	}
 
-	public long getWeightage() {
+	public String getWeightage() {
 		return weightage;
 	}
 
-	public void setWeightage(long weightage) {
+	public void setWeightage(String weightage) {
 		this.weightage = weightage;
 	}
 
@@ -83,12 +93,14 @@ public class ProjectParameter {
 		this.createdAt = createdAt;
 	}
 
-	public String getIsDeleted() {
+	public boolean isDeleted() {
 		return isDeleted;
 	}
 
-	public void setIsDeleted(String isDeleted) {
+	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+
+	
 	
 }

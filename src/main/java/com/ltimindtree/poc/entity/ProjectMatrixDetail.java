@@ -3,44 +3,45 @@ package com.ltimindtree.poc.entity;
 import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 
-@DynamoDBTable(tableName = "wsr_g_sample")
+@DynamoDBTable(tableName = "projectMatrix")
 public class ProjectMatrixDetail {
 
-	@Id
-	private long id;
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private static final long serialVersionUID = 1L;
 	
 	@DynamoDBHashKey()
 	private String projectId;
 	
+	@DynamoDBAttribute
 	private String projectName;
 	
-	private String engagementManagerName;
+	@DynamoDBAttribute
+	private String engineeringManagerName;
 	
+	@DynamoDBAttribute
 	private String weekOfAssessment;
 	
+	@DynamoDBAttribute
 	private ArrayList<String> paramList;
 	
+	@DynamoDBAttribute
 	private String overallScoreCurrent;
 	
+	@DynamoDBAttribute
 	private String overallScorelast;
 	
+	@DynamoDBAttribute
 	private String updatedAt;
 	
+	@DynamoDBAttribute
 	private String createdAt;
 	
-	private String isDeleted;
+	@DynamoDBAttribute
+	private boolean isDeleted;
 	
 	public String getProjectId() {
 		return projectId;
@@ -59,11 +60,19 @@ public class ProjectMatrixDetail {
 	}
 
 	public String getEngagementManagerName() {
-		return engagementManagerName;
+		return engineeringManagerName;
 	}
 
-	public void setEngagementManagerName(String engagementManagerName) {
-		this.engagementManagerName = engagementManagerName;
+	public void setEngagementManagerName(String engineeringManagerName) {
+		this.engineeringManagerName = engineeringManagerName;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public String getWeekOfAssessment() {
@@ -114,13 +123,7 @@ public class ProjectMatrixDetail {
 		this.createdAt = createdAt;
 	}
 
-	public String getIsDeleted() {
-		return isDeleted;
-	}
-
-	public void setIsDeleted(String isDeleted) {
-		this.isDeleted = isDeleted;
-	}
+	
 
 	
 	

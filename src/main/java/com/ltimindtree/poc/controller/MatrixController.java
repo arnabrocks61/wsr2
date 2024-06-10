@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.ltimindtree.poc.entity.ProjectData;
 import com.ltimindtree.poc.entity.ProjectMatrixDetail;
+import com.ltimindtree.poc.repository.ProjectMatrixRepo;
 import com.ltimindtree.poc.service.MatrixService;
 
 @RestController
@@ -22,35 +25,43 @@ import com.ltimindtree.poc.service.MatrixService;
 public class MatrixController {
 
 
-	/*
+	
 		
 		@Autowired
-		private MatrixService matrixService;
+		private ProjectMatrixRepo matrixRepo;
 		
 		@GetMapping
 		public ResponseEntity<?> findAll() {
 			
-			List<ProjectMatrixDetail> prods = matrixService.findAll();
 
 			
-			return ResponseEntity.ok().body(prods);
+			 Iterable<ProjectMatrixDetail> pdreturn = matrixRepo.findAll();
+			 for (ProjectMatrixDetail pd : pdreturn) {
+		            System.out.println("List object: " + new Gson().toJson(pd));
+		        }
+			//List<ProjectData> prods = projectService.findAll();
+
+			
+			return ResponseEntity.ok().body(pdreturn);
 		}
 
 		@PostMapping()
-		public ResponseEntity<ProjectMatrixDetail> createProduct(@RequestBody ProjectMatrixDetail projects) {
-			return ResponseEntity.ok().body(matrixService.createProduct(projects));
+		public ResponseEntity<Iterable<ProjectMatrixDetail>> createProduct(@RequestBody ProjectMatrixDetail projects) {
+			matrixRepo.save(projects);
+			return ResponseEntity.ok().body(matrixRepo.findAll());
 		}
 		
 		@PutMapping()
-		public ResponseEntity<List<ProjectMatrixDetail>> updateProduct(@RequestBody List<ProjectMatrixDetail> projectlist) {
-			return ResponseEntity.ok().body(matrixService.updateBulkProduct(projectlist));
+		public ResponseEntity<Iterable<ProjectMatrixDetail>> updateProduct(@RequestBody List<ProjectMatrixDetail> projectlist) {
+			matrixRepo.saveAll(projectlist);
+			return ResponseEntity.ok().body(matrixRepo.findAll());
 		}
 		
 		@DeleteMapping()
-		public HttpStatus deleteProduct(@PathVariable long id) {
-			matrixService.deleteById(id);
+		public HttpStatus deleteProduct(@PathVariable String projectId) {
+			matrixRepo.deleteById(null);
 			
 			return HttpStatus.OK;
 		}
-*/
+
 	}
