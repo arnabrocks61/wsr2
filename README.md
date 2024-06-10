@@ -1,16 +1,14 @@
 # wsr2
 
-[
-    {
-        "projectId": "p1",
-        "projectName": "proj1",
-        "entityType": "et1",
+ {
+        "projectId": "p2",
+        "projectName": "proj2",
+        "entityType": "et2",
         "du": "digital",
-        "engineeringManagerName": "em1",
+        "engineeringManagerName": "em2",
         "createdTs": "",
         "updatedTs": "",
         "deleted": false,
         "sunsetCompleted": false,
         "projectEvaluated": false
     }
-]
